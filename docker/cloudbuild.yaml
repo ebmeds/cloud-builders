@@ -24,7 +24,7 @@ steps:
   - '--file=Dockerfile-versioned'
   - '--build-arg=${_DOCKER_20}'
   - '.'
-  id: '20.10.18'
+  id: '20.10.17'
   wait_for: ['base']
 
 
@@ -53,7 +53,6 @@ steps:
 
 images:
 - 'gcr.io/$PROJECT_ID/docker:latest'
-- 'gcr.io/$PROJECT_ID/docker:19.03.9'
 - 'gcr.io/$PROJECT_ID/docker:20.10.17'
 
 timeout: 1200s
