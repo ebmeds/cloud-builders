@@ -12,7 +12,7 @@ steps:
   args:
   - 'build'
   - '--tag=temp'
-  - '--file=./Dockerfile-base'
+  - '--file=docker/Dockerfile-base'
   - '.'
   id: 'base'
 
@@ -21,7 +21,7 @@ steps:
   - 'build'
   - '--tag=gcr.io/$PROJECT_ID/docker:latest'
   - '--tag=gcr.io/$PROJECT_ID/docker:20.10.17'
-  - '--file=Dockerfile-versioned'
+  - '--file=docker/Dockerfile-versioned'
   - '--build-arg=${_DOCKER_20}'
   - '.'
   id: '20.10.17'
@@ -31,7 +31,7 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/docker:20.10.17'
   args:
   - 'build'
-  - '--file=Dockerfile-versioned'
+  - '--file=docker/Dockerfile-versioned'
   - '--build-arg=${_DOCKER_20}'
   - '.'
   wait_for: ['20.10.17']
