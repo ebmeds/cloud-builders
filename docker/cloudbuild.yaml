@@ -2,7 +2,7 @@
 # $ gcloud builds submit
 
 substitutions:
-  _DOCKER_20: DOCKER_VERSION=5:20.10.17~3-0~ubuntu-focal
+  _DOCKER_20: DOCKER_VERSION=5:24.0.6~3-0~ubuntu-focal
 
 steps:
 # Pre-requisite: build the base OS container; 'temp' is referenced in the
@@ -20,21 +20,21 @@ steps:
   args:
   - 'build'
   - '--tag=gcr.io/$PROJECT_ID/docker:latest'
-  - '--tag=gcr.io/$PROJECT_ID/docker:20.10.17'
+  - '--tag=gcr.io/$PROJECT_ID/docker:24.0.6'
   - '--file=docker/Dockerfile-versioned'
   - '--build-arg=${_DOCKER_20}'
   - '.'
-  id: '20.10.17'
+  id: '24.0.6'
   wait_for: ['base']
 
 
-- name: 'gcr.io/$PROJECT_ID/docker:20.10.17'
+- name: 'gcr.io/$PROJECT_ID/docker:24.0.6'
   args:
   - 'build'
   - '--file=docker/Dockerfile-versioned'
   - '--build-arg=${_DOCKER_20}'
   - '.'
-  wait_for: ['20.10.17']
+  wait_for: ['24.0.6']
 
 # Tests for future supported versions of docker builder go here.
 
@@ -44,15 +44,15 @@ steps:
 # the image built above.
 - name: 'gcr.io/$PROJECT_ID/docker'
   args: ['inspect', 'gcr.io/$PROJECT_ID/docker']
-  wait_for: ['20.10.17']
+  wait_for: ['24.0.6']
 # Execute a container. The "busybox" container is executed within the docker
 # build step to echo "Hello, world!"
 - name: 'gcr.io/$PROJECT_ID/docker'
   args: ['run', 'busybox', 'echo', 'Hello, world!']
-  wait_for: ['20.10.17']
+  wait_for: ['24.0.6']
 
 images:
 - 'gcr.io/$PROJECT_ID/docker:latest'
-- 'gcr.io/$PROJECT_ID/docker:20.10.17'
+- 'gcr.io/$PROJECT_ID/docker:24.0.6'
 
 timeout: 1200s
