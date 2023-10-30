@@ -8,13 +8,13 @@ steps:
 # Pre-requisite: build the base OS container; 'temp' is referenced in the
 # Dockerfile for subsequent steps but is not pushed. Building this shared base
 # image enables the versioned builders to share base layers.
-# - name: 'gcr.io/cloud-builders/docker'
-#   args:
-#   - 'build'
-#   - '--tag=temp'
-#   - '--file=./Dockerfile-base'
-#   - '.'
-#   id: 'base'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '--tag=temp'
+  - '--file=./Dockerfile-base'
+  - '.'
+  id: 'base'
 
 - name: 'gcr.io/cloud-builders/docker'
   args:
@@ -25,7 +25,7 @@ steps:
   - '--build-arg=${_DOCKER_20}'
   - '.'
   id: '20.10.17'
-  # wait_for: ['base']
+  wait_for: ['base']
 
 
 - name: 'gcr.io/$PROJECT_ID/docker:20.10.17'
