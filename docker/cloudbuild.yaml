@@ -25,7 +25,7 @@ steps:
   - '--build-arg=${_DOCKER_20}'
   - '.'
   id: '20.10.17'
-  wait_for: ['base']
+  # wait_for: ['base']
 
 
 - name: 'gcr.io/$PROJECT_ID/docker:20.10.17'
