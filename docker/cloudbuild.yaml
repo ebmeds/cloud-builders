@@ -12,7 +12,7 @@ steps:
   args:
   - 'build'
   - '--tag=temp'
-  - '--file=Dockerfile-base'
+  - '--file=./Dockerfile-base'
   - '.'
   id: 'base'
 
