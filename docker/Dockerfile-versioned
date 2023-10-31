@@ -1,10 +1,8 @@
 FROM temp
 
-ARG DOCKER_VERSION=VERSION
-
 RUN apt-get -y install \
-        docker-ce=${DOCKER_VERSION} \
-        docker-ce-cli=${DOCKER_VERSION} \
+        docker-ce \
+        docker-ce-cli \
         docker-compose docker-compose-plugin && \
     apt-get clean
 
